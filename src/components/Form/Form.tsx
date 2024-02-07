@@ -21,13 +21,12 @@ interface FormProps {
 
 
 export function Form(props: FormProps) {
-    console.log(props)
     const [name, setName] = useState<string>("");
     const [event, setEvent] = useState<KeyValue>({ key: "", val: "" });
     const [city, setCity] = useState<KeyValue>({ key: "", val: "" });
     const [errors, setErrors] = useState<JSX.Element[]>([]);
 
-    const choicesEvents = [
+    const choicesEvents: [string, string][] = [
         ["", "---"],
         ["front-end-react", "Front End - ReactJS"],
         ["back-end-react", "Back End - Node.js"],
@@ -35,7 +34,7 @@ export function Form(props: FormProps) {
         ["tester-manual", "Tester manualny"],
     ];
 
-    const choicesCities = [
+    const choicesCities: [string, string][] = [
         ["", "---"],
         ["online", "Online"],
         ["warsaw", "Warszawa"],
