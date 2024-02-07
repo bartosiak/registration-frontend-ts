@@ -24,7 +24,8 @@ function App() {
             });
     };
 
-    const deleteEvent = (rowId) => {
+    const deleteEvent = (rowId: number) => {
+      console.log(rowId)
         if (window.confirm("Usunąć zapis na szkolenie?")) {
             axios
                 .delete(config.api.url + "/events/delete/" + rowId)
