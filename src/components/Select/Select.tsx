@@ -8,9 +8,6 @@ interface SelectProps {
 }
 
 export const Select: React.FC<SelectProps> = ({ values, onValueChange, selectedValue, ...rest }) => {
-    console.log(values)
-    console.log(onValueChange)
-    console.log(selectedValue)
     return (
         <select value={selectedValue} onChange={onValueChange} {...rest}>
             {values.map(([value, text]) => (

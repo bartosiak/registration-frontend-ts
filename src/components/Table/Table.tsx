@@ -1,21 +1,23 @@
 import React from 'react';
 import "./Table.css";
 
-interface KeyValue {
-    key: string;
-    val: string;
-}
-
 interface Event {
     name: string;
-    event: KeyValue;
-    city: KeyValue;
     _id: number;
-}
+    city: {
+      key: string;
+      value: string;
+    },
+    event: {
+      key: string;
+      value: string;
+    }
+  }
 
 interface TableProps {
     events: Event[];
     deleteEvent: (id: number) => void;
+    className?: string;
 }
 
 export const Table: React.FC<TableProps> = ({ events, deleteEvent, ...rest }) => {
@@ -36,8 +38,8 @@ export const Table: React.FC<TableProps> = ({ events, deleteEvent, ...rest }) =>
                         <tr key={row._id}>
                             <td>{index + 1}</td>
                             <td>{row.name}</td>
-                            <td data-eventkey={row.event.key}>{row.event.val}</td>
-                            <td data-citykey={row.city.key}>{row.city.val}</td>
+                            <td data-eventkey={row.event.key}>{row.event.value}</td>
+                            <td data-citykey={row.city.key}>{row.city.value}</td>
                             <td>
                                 <button
                                     onClick={() => {
