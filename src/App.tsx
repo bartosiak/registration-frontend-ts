@@ -6,21 +6,20 @@ import { Table } from "./components/Table/Table";
 
 import "./App.css";
 
-interface Event {
-  name: string;
-  _id: number;
-  city: {
+export interface KeyValue {
     key: string;
-    value: string;
-  },
-  event: {
-    key: string;
-    value: string;
-  }
+    val: string;
+}
+
+export interface Event {
+    name: string;
+    event: KeyValue;
+    city: KeyValue;
+    _id?: number;
 }
 
 
-function App() {
+function App(): JSX.Element {
     const [events, setEvents] = useState< Event[]>([]);
 
     useEffect(() => {
@@ -28,9 +27,9 @@ function App() {
   
     }, []);
 
-    const getEvents = () => {
+    const getEvents = (): void => {
         axios
-            .get(config.api.url + "/events")
+            .get<Event[]>(config.api.url + "/events")
             .then((res) => {
                 setEvents(res.data);
             })
@@ -39,7 +38,7 @@ function App() {
             });
     };
 
-    const deleteEvent = (rowId: number) => {
+    const deleteEvent = (rowId: number): void => {
 
         if (window.confirm("Usunąć zapis na szkolenie?")) {
             axios

@@ -3,24 +3,14 @@ import { config } from "../../config";
 import { useState } from "react";
 import { Select } from "../Select/Select";
 import "./Form.css";
-
-interface KeyValue {
-    key: string;
-    val: string;
-}
-
-interface Event {
-    name: string;
-    event: KeyValue;
-    city: KeyValue;
-}
+import {Event, KeyValue} from "../../App"
 
 interface FormProps {
     getEvents: () => void;
   }
 
 
-export function Form(props: FormProps) {
+export function Form(props: FormProps): JSX.Element {
     const [name, setName] = useState<string>("");
     const [event, setEvent] = useState<KeyValue>({ key: "", val: "" });
     const [city, setCity] = useState<KeyValue>({ key: "", val: "" });
@@ -41,7 +31,7 @@ export function Form(props: FormProps) {
         ["cracow", "Kraków"],
     ];
 
-    const saveEvent = (eventObj: Event) => {
+    const saveEvent = (eventObj: Event): void => {
         axios
             .post(config.api.url + "/events/add", eventObj,)
             .then((res) => {
@@ -53,14 +43,14 @@ export function Form(props: FormProps) {
             });
     };
 
-    const resetForm = () => {
+    const resetForm = (): void => {
         setName("");
         setEvent({ key: "", val: "" });
         setCity({ key: "", val: "" });
         setErrors([]);
     };
 
-    const validateForm = (e: React.FormEvent<HTMLFormElement>) => {
+    const validateForm = (e: React.FormEvent<HTMLFormElement>): boolean | undefined => {
         e.preventDefault();
 
         const errorsValidate: string[] = [];
@@ -97,13 +87,13 @@ export function Form(props: FormProps) {
         resetForm();
     };
 
-    const handleChangeEvent = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const handleChangeEvent = (e: React.ChangeEvent<HTMLSelectElement>): void => {
         setEvent({
             key: e.target.value,
             val: e.target.options[e.target.selectedIndex].innerText,
         });
     };
-    const handleChangeCity = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const handleChangeCity = (e: React.ChangeEvent<HTMLSelectElement>): void => {
         setCity({
             key: e.target.value,
             val: e.target.options[e.target.selectedIndex].innerText,
